@@ -1,19 +1,17 @@
 import http from "http";
-import { Server as WebSocketServer } from "ws";
 import dotenv from "dotenv";
 import app from "./app";
-import { initWebSocket } from "./config/websocket.config";
+import { initializeWebSocket } from "./config/websocket.config";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9000;
 
 // Create an HTTP server
 const server = http.createServer(app);
 
 // Initialize WebSocket Server
-const wss = new WebSocketServer({ server });
-initWebSocket(wss);
+initializeWebSocket(server)
 
 // Start Express + WebSocket Server
 server.listen(PORT, () => {

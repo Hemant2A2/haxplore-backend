@@ -24,12 +24,13 @@
   },
   "contributors": [],
   "scripts": {
-    "clean" : "rm -rf dist",
-    "build" : "npm run clean && npx tsc", 
-    "start" : "nodemon --exec node --loader ts-node/esm src/index.ts"
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npx tsc",
+    "start": "nodemon --exec node --loader ts-node/esm src/index.ts"
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@types/ws": "^8.5.14",
     "body-parser": "^1.20.3",
     "compression": "^1.7.5",
     "cookie-parser": "^1.4.7",
