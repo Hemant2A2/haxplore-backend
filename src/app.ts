@@ -5,6 +5,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import { connectDB } from "./config/db.config";
+import authRoutes from "./routes/auth.routes";
 import uploadRoutes from "./routes/upload.routes";
 import collageRoutes from "./routes/collage.routes";
 import chatRoutes from "./routes/chat.routes";
@@ -25,6 +26,7 @@ app.use(morgan("dev"));
 connectDB();
 
 // Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/collage", collageRoutes);
 app.use("/api/chat", chatRoutes);

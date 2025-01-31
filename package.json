@@ -30,7 +30,9 @@
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@types/bcryptjs": "^2.4.6",
     "@types/helmet": "^0.0.48",
+    "@types/jsonwebtoken": "^9.0.8",
     "@types/mongoose": "^5.11.96",
     "@types/morgan": "^1.9.9",
     "@types/ws": "^8.5.14",
