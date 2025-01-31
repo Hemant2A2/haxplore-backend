@@ -1,4 +1,5 @@
 import WebSocket from "ws";
+import { createSnapshot, restoreSnapshot } from "../services/versionHistory.service";
 
 interface ClientData {
   ws: WebSocket;
@@ -30,7 +31,7 @@ export class WebSocketService {
     });
   }
 
-  static handleMessage(ws: WebSocket, message: string) {
+  static async handleMessage(ws: WebSocket, message: string) {
     try {
       const data = JSON.parse(message);
 
@@ -64,8 +65,38 @@ export class WebSocketService {
           this.broadcast({ type: "collage_updated", data: data.collage });
           break;
 
-        case "save_version":
-          this.broadcast({ type: "version_saved", data: data.version });
+        case "save_snapshot":
+          try {
+            const { collageId, content } = data.payload;
+            const snapshot = await createSnapshot(collageId, content);
+
+            this.broadcast({
+              type: "snapshot_saved",
+              snapshot,
+            });
+          } catch (error) {
+            console.error("Failed to save snapshot:", error);
+            ws.send(JSON.stringify({ type: "error", message: "Snapshot save failed." }));
+          }
+          break;
+
+          case "restore_snapshot":
+          try {
+            const { snapshotId } = data.payload;
+            const restoredSnapshot = await restoreSnapshot(snapshotId);
+
+            if (restoredSnapshot) {
+              this.broadcast({
+                type: "snapshot_restored",
+                snapshot: restoredSnapshot,
+              });
+            } else {
+              ws.send(JSON.stringify({ type: "error", message: "Snapshot not found." }));
+            }
+          } catch (error) {
+            console.error("Failed to restore snapshot:", error);
+            ws.send(JSON.stringify({ type: "error", message: "Snapshot restore failed." }));
+          }
           break;
 
         default:

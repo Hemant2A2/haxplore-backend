@@ -16,8 +16,8 @@ export const updateCollage = async (req: Request, res: Response) => {
     const { images } = req.body;
     const updatedCollage = await Collage.findByIdAndUpdate(req.params.id, { images }, { new: true });
 
-    // Notify all users about the update
-    WebSocketService.broadcast({ type: "collage_updated", data: updatedCollage });
+    // // Notify all users about the update
+    // WebSocketService.broadcast({ type: "collage_updated", data: updatedCollage });
 
     res.json(updatedCollage);
   } catch (err) {
