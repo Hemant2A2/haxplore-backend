@@ -10,12 +10,11 @@ const PORT = process.env.PORT;
 // Create an HTTP server
 const server = http.createServer(app);
 
-// Initialize WebSocket Server
-initializeWebSocket(server)
-
 // Start Express + WebSocket Server
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  // Initialize WebSocket Server
+  initializeWebSocket(server)
 });
 
 export default server;

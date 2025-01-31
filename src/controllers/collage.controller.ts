@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { WebSocketService } from "../services/websocket.service";
 import Collage from "../models/collage.model";
 
 export const getCollage = async (req: Request, res: Response) => {

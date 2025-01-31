@@ -1,5 +1,5 @@
 import User from "../models/user.model";
-import { comparePassword, generateToken, hashPassword } from "utils/helpers";
+import { comparePassword, generateToken, hashPassword } from "../utils/helpers";
 
 
 export const register = async ({ username, email, password }: { username: string; email: string; password: string }) => {
