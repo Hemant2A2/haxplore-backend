@@ -9,7 +9,11 @@ export const uploadFile = async (req: Request, res: Response): Promise<void> => 
     }
 
     const fileData = await saveFile(req.file);
-    res.status(201).json({ message: "File uploaded successfully", file: fileData });
+    // Return the file path wrapped in an array for consistency.
+    res.status(201).json({
+      message: "File uploaded successfully",
+      previewPaths: [fileData.path],
+    });
   } catch (error) {
     console.error("Upload error:", error);
     res.status(500).json({ error: "Internal Server Error" });

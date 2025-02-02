@@ -3,6 +3,7 @@ import { WebSocketService } from "../services/websocket.service";
 
 export function initializeWebSocket(server: any) {
   const wss = new WebSocketServer({ server });
+  console.log("WebSocket server initialized on the same HTTP server.");
 
   wss.on("connection", (ws) => {
     console.log("New WebSocket connection");

@@ -99,6 +99,11 @@ export class WebSocketService {
           }
           break;
 
+          case "addImage":
+          // Broadcast the image addition so that all connected clients update their collage in real time.
+          this.broadcast({ type: "addImage", src: data.src, userId: data.userId });
+          break;
+
         default:
           console.warn("Unknown message type:", data.type);
       }

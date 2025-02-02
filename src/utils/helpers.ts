@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { Request } from "express";
 import { IUser } from "../models/user.model";
 
-const JWT_SECRET = process.env.JWT_SECRET || "default_secret";
+const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 
 // Hash the password
 export const hashPassword = async (password: string): Promise<string> => {
